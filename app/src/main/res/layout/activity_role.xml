@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/opening_nutrition_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background"
+    tools:context=".Role.RoleActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Pilih Role Anda"
+            android:textColor="@color/black"
+            android:textSize="30dp"></TextView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pengajar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/gambarInformation1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:backgroundTint="#CCCFFF"
+                            android:importantForAccessibility="no"
+                            android:importantForAutofill="yes"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/baseline_supervisor_account_24"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:id="@+id/rekomendasimenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Pengajar"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/siswa"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="80dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/gambarInformation2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:backgroundTint="#CCCFFF"
+                            android:importantForAccessibility="no"
+                            android:importantForAutofill="yes"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/baseline_self_improvement_24"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:id="@+id/custommenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Siswa"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="50dp"
+            android:backgroundTint="@color/blueprimary"
+            app:cardCornerRadius="30dp"
+            app:strokeWidth="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Pilih"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
