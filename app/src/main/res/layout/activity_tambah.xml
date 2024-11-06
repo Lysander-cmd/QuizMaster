@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="Back Arrow"
+            app:tint="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Kuis"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+    <!-- Container utama -->
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp">
+        <!-- Input Judul Kuis -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul Kuis"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editTextJudulKuis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Judul Kuis di sini"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Bagian Pertanyaan dan Opsi -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Pertanyaan -->
+            <EditText
+                android:id="@+id/editTextPertanyaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tulis pertanyaan (0/500)"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@android:color/darker_gray" />
+
+
+            <!-- Container Opsi Tambahan -->
+            <LinearLayout
+                android:id="@+id/opsiContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+            </LinearLayout>
+
+            <!-- Tombol Tambah Opsi -->
+            <Button
+                android:id="@+id/buttonTambahOpsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambah Opsi"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Jawaban dan Input Lainnya -->
+            <EditText
+                android:id="@+id/editTextJawaban"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jawaban"
+                android:padding="8dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:layout_marginBottom="8dp" />
+            <EditText
+                android:id="@+id/editTextMapel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mata Pelajaran"
+                android:padding="8dp"
+                android:backgroundTint="@android:color/darker_gray" />
+            <EditText
+                android:id="@+id/editTextTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Waktu"
+                android:padding="8dp"
+                android:backgroundTint="@android:color/darker_gray" />
+            <EditText
+                android:id="@+id/editTextDifficult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Level"
+                android:padding="8dp"
+                android:backgroundTint="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <!-- Tombol Tambah Kuis -->
+        <Button
+            android:id="@+id/buttonSimpanKuis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan Kuis"
+            android:backgroundTint="@color/blueprimary"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/buttonTambahKuis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambah Kuis"
+            android:backgroundTint="@color/blueprimary"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>
