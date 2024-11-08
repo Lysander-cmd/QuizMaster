@@ -16,6 +16,7 @@
         android:layout_marginBottom="16dp">
 
         <ImageView
+            android:id="@+id/ic_arrow_left"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_arrow_left"
@@ -80,7 +81,6 @@
                             android:id="@+id/textTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Quiz 01 - Fisika Kuantum"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@android:color/black" />
@@ -95,7 +95,6 @@
                                 android:id="@+id/textSubject"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Fisika"
                                 android:textColor="#6B7280"
                                 android:drawableLeft="@drawable/book"
                                 android:drawablePadding="4dp" />
@@ -104,7 +103,6 @@
                                 android:id="@+id/textDuration"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="60 Menit"
                                 android:textColor="#6B7280"
                                 android:drawableLeft="@drawable/time"
                                 android:drawablePadding="4dp" />
@@ -113,7 +111,6 @@
                                 android:id="@+id/textDifficulty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Mudah"
                                 android:textColor="#6B7280"
                                 android:drawableLeft="@drawable/stairsup"
                                 android:drawablePadding="4dp" />
@@ -162,56 +159,34 @@
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="@android:color/darker_gray" />
 
-                <!-- Opsi 1 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Opsi 1"
-                        android:padding="8dp"
-                        android:backgroundTint="@android:color/darker_gray" />
-                </LinearLayout>
-
-                <!-- Tambah Opsi -->
+                <!-- Container Opsi Tambahan -->
                 <LinearLayout
                     android:id="@+id/opsiContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
+                    android:orientation="vertical"
                     android:layout_marginBottom="8dp">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp" />
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Tambah Opsi"
-                        android:padding="8dp"
-                        android:backgroundTint="@android:color/darker_gray" />
                 </LinearLayout>
 
-                <!-- Jawaban, Mata Pelajaran, Waktu, Level -->
+                <!-- Tombol Tambah Opsi -->
+                <Button
+                    android:id="@+id/buttonTambahOpsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tambah Opsi"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Jawaban dan Input Lainnya -->
                 <EditText
                     android:id="@+id/editTextJawaban"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Jawaban"
                     android:padding="8dp"
-                    android:backgroundTint="@android:color/darker_gray" />
+                    android:backgroundTint="@android:color/darker_gray"
+                    android:layout_marginBottom="8dp" />
                 <EditText
                     android:id="@+id/editTextMapel"
                     android:layout_width="match_parent"
@@ -233,8 +208,8 @@
                     android:hint="Level"
                     android:padding="8dp"
                     android:backgroundTint="@android:color/darker_gray" />
-            </LinearLayout>
 
+            </LinearLayout>
             <!-- Tombol Edit Kuis -->
             <Button
                 android:id="@+id/buttonUpdateQuiz"

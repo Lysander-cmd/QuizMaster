@@ -4,10 +4,12 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -48,7 +50,7 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        recyclerViewQuiz = findViewById(R.id.recyclerViewQuiz);
+        recyclerViewQuiz = findViewById(R.id.recyclerViewQuizList);
         recyclerViewQuiz.setLayoutManager(new LinearLayoutManager(this));
         quizEditAdapter = new QuizEditAdapter(quizList, this, quiz -> openDetailEditActivity(quiz.getId()));
         recyclerViewQuiz.setAdapter(quizEditAdapter);
@@ -56,6 +58,12 @@ public class EditActivity extends AppCompatActivity {
         // Mengambil data kuis dari Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("kuis");
         fetchQuizData();
+
+        ImageView icArrowLeft = findViewById(R.id.ic_arrow_left);
+        icArrowLeft.setOnClickListener(v -> {
+
+            finish();
+        });
     }
 
     // Mengambil data kuis dari Firebase dan mengupdate RecyclerView
@@ -66,7 +74,12 @@ public class EditActivity extends AppCompatActivity {
                 quizList.clear();
                 for (DataSnapshot quizSnapshot : snapshot.getChildren()) {
                     QuizItem quiz = quizSnapshot.getValue(QuizItem.class);
-                    quizList.add(quiz);
+                    if (quiz != null) {
+                        quiz.setId(quizSnapshot.getKey()); // Mengatur ID dari key Firebase
+                        quizList.add(quiz);
+                        // Tambahkan log untuk melihat ID kuis yang diperoleh
+                        Log.d("EditActivity", "Quiz ID: " + quiz.getId());
+                    }
                 }
                 quizEditAdapter.notifyDataSetChanged();
             }

@@ -8,9 +8,12 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.NavController;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class DetailEditActivity extends AppCompatActivity {
 
     private EditText editTextJudulKuis, editTextPertanyaan, editTextJawaban, editTextMapel, editTextTime, editTextDifficult;
+    private TextView textTitle, textSubject, textDuration, textDifficulty;
     private Button buttonUpdateKuis;
     private DatabaseReference databaseReference;
     private String quizId;
@@ -51,8 +55,17 @@ public class DetailEditActivity extends AppCompatActivity {
         editTextDifficult = findViewById(R.id.editTextDifficult);
         buttonUpdateKuis = findViewById(R.id.buttonUpdateQuiz);
 
+        // CardView elements
+        textTitle = findViewById(R.id.textTitle);
+        textSubject = findViewById(R.id.textSubject);
+        textDuration = findViewById(R.id.textDuration);
+        textDifficulty = findViewById(R.id.textDifficulty);
+
         // Mengambil quizId dari Intent
         quizId = getIntent().getStringExtra("quizId");
+        if (quizId != null) {
+            loadQuizData(quizId);
+        }
 
         if (quizId != null) {
             loadQuizData(quizId); // Load data kuis dari Firebase
@@ -60,6 +73,12 @@ public class DetailEditActivity extends AppCompatActivity {
 
         // Menambahkan listener untuk tombol update
         buttonUpdateKuis.setOnClickListener(v -> updateDataKuis());
+
+        ImageView icArrowLeft = findViewById(R.id.ic_arrow_left);
+        icArrowLeft.setOnClickListener(v -> {
+
+            finish();
+        });
     }
 
     // Memuat data kuis dari Firebase berdasarkan quizId
@@ -70,13 +89,19 @@ public class DetailEditActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 QuizItem quiz = snapshot.getValue(QuizItem.class);
                 if (quiz != null) {
-                    // Set data ke EditText untuk diedit
+                    // Mengatur data ke dalam EditText untuk diedit
                     editTextJudulKuis.setText(quiz.getTitle());
                     editTextPertanyaan.setText(quiz.getQuestion());
                     editTextJawaban.setText(quiz.getAnswer());
                     editTextMapel.setText(quiz.getSubject());
                     editTextTime.setText(quiz.getDuration());
                     editTextDifficult.setText(quiz.getDifficulty());
+
+                    // Mengatur data ke dalam CardView
+                    textTitle.setText(quiz.getTitle());
+                    textSubject.setText(quiz.getSubject());
+                    textDuration.setText("Waktu: " + quiz.getDuration());
+                    textDifficulty.setText("Level: " + quiz.getDifficulty());
                 }
             }
 
@@ -111,6 +136,14 @@ public class DetailEditActivity extends AppCompatActivity {
 
         databaseReference.updateChildren(kuisData).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                // Memperbarui tampilan EditText dengan data yang baru
+                editTextJudulKuis.setText(judulKuis);
+                editTextPertanyaan.setText(pertanyaan);
+                editTextJawaban.setText(jawaban);
+                editTextMapel.setText(mataPelajaran);
+                editTextTime.setText(waktu);
+                editTextDifficult.setText(level);
+
                 Toast.makeText(DetailEditActivity.this, "Kuis berhasil diperbarui", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
@@ -118,4 +151,4 @@ public class DetailEditActivity extends AppCompatActivity {
             }
         });
     }
-}
+    }

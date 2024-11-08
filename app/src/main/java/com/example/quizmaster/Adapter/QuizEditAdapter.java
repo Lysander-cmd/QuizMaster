@@ -36,7 +36,7 @@ import java.util.List;
         @NonNull
         @Override
         public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_quiz, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_quiz_edit, parent, false);
             return new QuizViewHolder(view);
         }
 
@@ -48,7 +48,6 @@ import java.util.List;
             holder.textDuration.setText(quiz.getDuration());
             holder.textDifficulty.setText(quiz.getDifficulty());
             holder.imageQuiz.setImageResource(quiz.getImageResource());
-
             holder.buttonEditQuiz.setOnClickListener(v -> onQuizEditListener.onEditClick(quiz));
         }
 
