@@ -14,6 +14,9 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
+            android:name=".Manajemen.HapusActivity"
+            android:exported="false" />
+        <activity
             android:name=".Manajemen.DetailEditActivity"
             android:exported="false"
             android:theme="@style/Theme.QuizMaster" />

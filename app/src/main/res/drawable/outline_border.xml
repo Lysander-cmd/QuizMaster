@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Warna background putih -->
     <solid android:color="#ffffff" />
+
+    <!-- Border dengan ketebalan 2dp dan warna hitam -->
     <stroke
-        android:width="2px"
-        android:color="#95969D" />
-    <corners android:radius="10dp" />
+        android:width="2dp"
+        android:color="@color/black" />
+
+    <!-- Sudut melengkung -->
+    <corners android:radius="8dp" />
 </shape>

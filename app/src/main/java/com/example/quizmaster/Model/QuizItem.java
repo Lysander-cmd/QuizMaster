@@ -1,5 +1,7 @@
 package com.example.quizmaster.Model;
 
+import com.example.quizmaster.R;
+
 import java.util.ArrayList;
 
 public class QuizItem {
@@ -29,7 +31,7 @@ public class QuizItem {
         this.pertanyaan = pertanyaan;
         this.jawaban = jawaban;
         this.opsi = opsi;
-        this.imageResource = imageResource;
+        this.imageResource = R.drawable.quiz;
     }
 
     // Getter dan Setter

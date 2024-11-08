@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.quizmaster.Manajemen.EditActivity;
+import com.example.quizmaster.Manajemen.HapusActivity;
 import com.example.quizmaster.Manajemen.TambahActivity;
 import com.example.quizmaster.R;
 
@@ -20,6 +21,7 @@ import com.example.quizmaster.R;
 public class QuizFragment extends Fragment {
     private Button btnTambahQuiz;
     private Button btnEditQuiz;
+    private Button btnHapusQuiz;
 
     @Nullable
     @Override
@@ -30,6 +32,7 @@ public class QuizFragment extends Fragment {
         // Initialize the button
         btnTambahQuiz = view.findViewById(R.id.btn_tambah_quiz);
         btnEditQuiz = view.findViewById(R.id.btn_edit_quiz);
+        btnHapusQuiz = view.findViewById(R.id.btn_hapus_quiz);
 
         // Set OnClickListener on btnTambahQuiz
         btnTambahQuiz.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +51,14 @@ public class QuizFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btnHapusQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start HapusActivity
+                Intent intent = new Intent(getActivity(), HapusActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

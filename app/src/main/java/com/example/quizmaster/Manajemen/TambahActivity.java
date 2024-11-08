@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -69,6 +70,11 @@ public class TambahActivity extends AppCompatActivity {
             public void onClick(View v) {
                 simpanDataKuis();
             }
+        });
+        ImageView icArrowLeft = findViewById(R.id.ic_arrow_left);
+        icArrowLeft.setOnClickListener(v -> {
+            // Kembali ke fragment sebelumnya
+            finish();
         });
     }
 
