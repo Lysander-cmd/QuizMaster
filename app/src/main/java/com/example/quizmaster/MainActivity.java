@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.quizmaster.Fragment.HomePageFragment;
+import com.example.quizmaster.Fragment.ProfileFragment;
 import com.example.quizmaster.Fragment.QuizFragment;
 import com.example.quizmaster.databinding.ActivityMainBinding;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomePageFragment(), "Beranda");
         adapter.addFragment(new QuizFragment(), "Quiz");
+        adapter.addFragment(new ProfileFragment(), "Profile");
+
 //
 
         binding.viewPager.setAdapter(adapter);
