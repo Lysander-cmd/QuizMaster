@@ -11,10 +11,14 @@ import com.example.quizmaster.Controller.SignUpController;
 import com.example.quizmaster.Database.DataPengguna;
 import com.example.quizmaster.databinding.ActivityRegisterSiswaBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterSiswaActivity extends AppCompatActivity {
     private ActivityRegisterSiswaBinding binding;
     private SignUpController signUpController;
+    private FirebaseAuth auth;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +26,23 @@ public class RegisterSiswaActivity extends AppCompatActivity {
         binding = ActivityRegisterSiswaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        auth = FirebaseAuth.getInstance();  // Inisialisasi FirebaseAuth
         signUpController = new SignUpController(this);
+
+        String role = getIntent().getStringExtra("role");  // Ambil role dari Intent
+
+        // Dapatkan userId hanya jika pengguna saat ini tidak null
+        if (auth.getCurrentUser() != null) {
+            String userId = auth.getCurrentUser().getUid();
+            userRef = FirebaseDatabase.getInstance().getReference()
+                    .child("users").child(userId);
+
+            // Simpan role ke database
+            userRef.child("role").setValue(role);
+        } else {
+            Toast.makeText(this, "Pengguna tidak terautentikasi.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         binding.btnRegister.setOnClickListener(v -> {
             String username = binding.edtNama.getText().toString();
@@ -31,7 +51,7 @@ public class RegisterSiswaActivity extends AppCompatActivity {
             String password = binding.edtPasswordRegister.getText().toString();
             String confirmPassword = binding.edtKonfirmasiPasswordRegister.getText().toString();
 
-            signUpController.fillFormRegistrasi(username, noTelp, email, password, confirmPassword, null, false);
+            signUpController.fillFormRegistrasi(username, noTelp, email, password, confirmPassword, null, false, role); // Tambahkan role sebagai parameter
         });
     }
 }

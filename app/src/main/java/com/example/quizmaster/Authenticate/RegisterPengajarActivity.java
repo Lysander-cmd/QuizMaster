@@ -35,7 +35,7 @@ public class RegisterPengajarActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         signUpController = new SignUpController(this);
-
+        String role = getIntent().getStringExtra("role");
         binding.btnRegister.setOnClickListener(v -> {
             String username = binding.edtNama.getText().toString();
             String noTelp = binding.edtNoTelp.getText().toString();
@@ -43,7 +43,7 @@ public class RegisterPengajarActivity extends AppCompatActivity {
             String password = binding.edtPasswordRegister.getText().toString();
             String confirmPassword = binding.edtKonfirmasiPasswordRegister.getText().toString();
 
-            signUpController.fillFormRegistrasi(username, noTelp, email, password, confirmPassword, fileUri, true);
+            signUpController.fillFormRegistrasi(username, noTelp, email, password, confirmPassword, fileUri, false, role);
         });
 
         binding.btnUploadFile.setOnClickListener(v -> openFilePicker());

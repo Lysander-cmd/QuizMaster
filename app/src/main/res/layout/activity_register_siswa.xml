@@ -71,7 +71,7 @@
                 android:background="@color/white"
                 android:fontFamily="@font/roboto"
                 android:hint="Masukkan Nama Lengkap Disini "
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:padding="15dp"
                 android:textSize="15dp"
                 android:textColorHint="#95969D" />
@@ -103,7 +103,7 @@
                 android:background="@color/white"
                 android:fontFamily="@font/roboto"
                 android:hint="Nomor Telepon"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:padding="15dp"
                 android:textSize="15dp"
                 android:textColorHint="#95969D" />
