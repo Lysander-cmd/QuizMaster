@@ -26,7 +26,8 @@ public class SignUpController {
         this.db = new DataPengguna();
     }
 
-    public void fillFormRegistrasi(String username, String noTelp, String email, String password, String confirmPassword, @Nullable Uri fileUri, boolean isTeacher) {
+    public void fillFormRegistrasi(String username, String noTelp, String email, String password, String confirmPassword, @Nullable Uri fileUri, boolean isTeacher, String role) {
+        // ... validasi lainnya
         // Validasi nomor telepon
         if (noTelp.isEmpty() || noTelp.length() < 10) {
             Toast.makeText(context, "Nomor Telepon Tidak Valid", Toast.LENGTH_SHORT).show();
@@ -60,12 +61,15 @@ public class SignUpController {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        // Simpan role ke database
+                        String userId = auth.getCurrentUser().getUid();
+                        db.saveUserData(userId, username, noTelp, role);
+
                         if (isTeacher && fileUri != null) {
                             // Upload file jika pengajar
-                            uploadFileToFirebaseStorage(username, noTelp, fileUri);
+                            navigateToLogin();
                         } else {
                             // Simpan data tanpa file untuk siswa
-                            db.saveTemporary(username, noTelp);
                             navigateToLogin();
                         }
                     } else {
@@ -74,13 +78,14 @@ public class SignUpController {
                 });
     }
 
-    private void uploadFileToFirebaseStorage(String username, String noTelp, Uri fileUri) {
+    private void uploadFileToFirebaseStorage(String userId, String username, String noTelp, Uri fileUri, String role) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("uploads/" + System.currentTimeMillis());
         UploadTask uploadTask = storageReference.putFile(fileUri);
         uploadTask.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    db.saveTemporary(username, noTelp);
+                    // Simpan data pengguna termasuk role setelah file berhasil diupload
+                    db.saveUserData(userId, username, noTelp, role);
                     navigateToLogin();
                 });
             } else {

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.quizmaster.Fragment.HomePageFragment;
+import com.example.quizmaster.Fragment.HomePageSiswaFragment;
 import com.example.quizmaster.Fragment.ProfileFragment;
 import com.example.quizmaster.Fragment.QuizFragment;
 import com.example.quizmaster.databinding.ActivityMainBinding;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +31,24 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Dapatkan role dari Intent
+        role = getIntent().getStringExtra("role");
+
         setupTab();
     }
 
     private void setupTab() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomePageFragment(), "Beranda");
+
+        // Tentukan fragmen beranda berdasarkan role
+        if ("siswa".equals(role)) {
+            adapter.addFragment(new HomePageSiswaFragment(), "Beranda");
+        } else {
+            adapter.addFragment(new HomePageFragment(), "Beranda");
+        }
+
         adapter.addFragment(new QuizFragment(), "Quiz");
         adapter.addFragment(new ProfileFragment(), "Profile");
-
-//
 
         binding.viewPager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(binding.viewPager);

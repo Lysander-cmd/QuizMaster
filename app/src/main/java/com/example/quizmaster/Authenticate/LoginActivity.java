@@ -11,11 +11,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizmaster.Fragment.HomePageFragment;
+import com.example.quizmaster.Fragment.HomePageSiswaFragment;
 import com.example.quizmaster.MainActivity;
 import com.example.quizmaster.R;
 import com.example.quizmaster.Role.RoleActivity;
 import com.example.quizmaster.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -68,15 +75,38 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        if (email.equals("pengajar@gmail.com")) {
-                            Toast.makeText(LoginActivity.this, "Selamat datang " + email, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Selamat datang " + email, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
+                        String userId = auth.getCurrentUser().getUid();
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
+                                .child("users").child(userId).child("role");
+
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    String role = dataSnapshot.getValue(String.class);
+                                    Toast.makeText(LoginActivity.this, "Selamat datang " + email, Toast.LENGTH_SHORT).show();
+
+                                    // Arahkan pengguna berdasarkan role
+                                    if ("pengajar".equals(role)) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("role", "pengajar");
+                                        startActivity(intent);
+                                    } else if ("siswa".equals(role)) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("role", "siswa");
+                                        startActivity(intent);
+                                    }
+                                    finish(); // Tutup LoginActivity
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Role tidak ditemukan", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(LoginActivity.this, "Gagal membaca data role", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         Toast.makeText(LoginActivity.this, task.getException() != null ? task.getException().getMessage() : "Login gagal", Toast.LENGTH_SHORT).show();
                     }

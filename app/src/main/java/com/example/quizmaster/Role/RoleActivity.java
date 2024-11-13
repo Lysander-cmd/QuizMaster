@@ -33,16 +33,15 @@ public class RoleActivity extends AppCompatActivity {
             selectedRole[0] = "siswa";
             updateCardViewSelection(binding.siswa, binding.pengajar);
         });
-
         binding.btnLogout.setOnClickListener(v -> {
             if ("pengajar".equals(selectedRole[0])) {
-                // Navigasi ke RegisterActivity ketika tombol logout ditekan
                 Intent intent = new Intent(RoleActivity.this, RegisterPengajarActivity.class);
+                intent.putExtra("role", "pengajar"); // Mengirim data role ke RegisterActivity
                 startActivity(intent);
             } else if ("siswa".equals(selectedRole[0])) {
                 Intent intent = new Intent(RoleActivity.this, RegisterSiswaActivity.class);
+                intent.putExtra("role", "siswa"); // Mengirim data role ke RegisterActivity
                 startActivity(intent);
-            } else {
             }
         });
     }
