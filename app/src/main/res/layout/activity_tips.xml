@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/ic_arrow_left"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="Back Arrow"
+            app:tint="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Kuis"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Input Judul Tips -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/judulLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul Tips"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"/>
+
+        <EditText
+            android:id="@+id/judulTipsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Judul disini"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Input Tips -->
+        <EditText
+            android:id="@+id/tipsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tulis tips disini"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:minHeight="120dp"
+            android:gravity="top"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+    <!-- Tombol Posting -->
+    <Button
+        android:id="@+id/postingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posting Tips"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"/>
+</LinearLayout>

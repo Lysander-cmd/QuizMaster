@@ -18,12 +18,10 @@ public class DataPengguna {
         db = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void saveTemporary(String username, String noTelp) {
-        String userId = auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : null;
-        if (userId != null) {
-            db.child("users").child(userId).child("username").setValue(username);
-            db.child("users").child(userId).child("noTelp").setValue(noTelp);
-        }
+    public void saveUserData(String userId, String username, String noTelp, String role) {
+        db.child("users").child(userId).child("username").setValue(username);
+        db.child("users").child(userId).child("noTelp").setValue(noTelp);
+        db.child("users").child(userId).child("role").setValue(role);
     }
 
     public void readUsername(String userId, TextView textView) {

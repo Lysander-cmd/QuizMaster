@@ -52,4 +52,5 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation ("com.google.firebase:firebase-database-ktx:20.3.1")
     implementation ("com.google.firebase:firebase-storage-ktx:20.3.0")
+    implementation ("com.dropbox.core:dropbox-core-sdk:5.3.0")
 }
