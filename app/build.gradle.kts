@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.quizmaster"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.quizmaster"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 23
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -47,10 +47,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
-    implementation ("com.google.firebase:firebase-auth-ktx:22.3.1")
-    implementation ("com.google.firebase:firebase-database-ktx:20.3.1")
-    implementation ("com.google.firebase:firebase-storage-ktx:20.3.0")
+    implementation ("com.google.firebase:firebase-auth-ktx:23.1.0")
+    implementation ("com.google.firebase:firebase-database-ktx:21.0.0")
+    implementation ("com.google.firebase:firebase-storage-ktx:21.0.1")
     implementation ("com.dropbox.core:dropbox-core-sdk:5.3.0")
+    //Circle Profile
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }

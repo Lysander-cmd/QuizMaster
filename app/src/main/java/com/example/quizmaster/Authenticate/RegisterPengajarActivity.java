@@ -63,4 +63,10 @@ public class RegisterPengajarActivity extends AppCompatActivity {
             binding.tvFileStatus.setText("File dipilih: " + fileUri.getLastPathSegment());
         }
     }
+    @Override
+    public void onBackPressed() {
+        // Mencegah kembali ke layar registrasi, aplikasi akan keluar
+        super.onBackPressed();
+        finishAffinity(); // Menutup semua aktivitas yang ada di dalam task
+    }
 }

@@ -111,5 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, task.getException() != null ? task.getException().getMessage() : "Login gagal", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
+
 }

@@ -3,6 +3,7 @@ package com.example.quizmaster.Role;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,15 +34,19 @@ public class RoleActivity extends AppCompatActivity {
             selectedRole[0] = "siswa";
             updateCardViewSelection(binding.siswa, binding.pengajar);
         });
+
         binding.btnLogout.setOnClickListener(v -> {
             if ("pengajar".equals(selectedRole[0])) {
                 Intent intent = new Intent(RoleActivity.this, RegisterPengajarActivity.class);
-                intent.putExtra("role", "pengajar"); // Mengirim data role ke RegisterActivity
+                intent.putExtra("role", "pengajar"); // Kirim data role ke RegisterActivity
                 startActivity(intent);
             } else if ("siswa".equals(selectedRole[0])) {
                 Intent intent = new Intent(RoleActivity.this, RegisterSiswaActivity.class);
-                intent.putExtra("role", "siswa"); // Mengirim data role ke RegisterActivity
+                intent.putExtra("role", "siswa"); // Kirim data role ke RegisterActivity
                 startActivity(intent);
+            } else {
+                // Tampilkan pesan jika role belum dipilih
+                Toast.makeText(RoleActivity.this, "Pilih role terlebih dahulu", Toast.LENGTH_SHORT).show();
             }
         });
     }

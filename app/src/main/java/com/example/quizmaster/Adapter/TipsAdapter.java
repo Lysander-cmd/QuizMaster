@@ -1,6 +1,7 @@
 package com.example.quizmaster.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.quizmaster.DetailTipsActivity;
 import com.example.quizmaster.Model.DataTips;
 import com.example.quizmaster.R;
 import java.util.List;
@@ -36,7 +39,10 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.TipsViewHolder
         holder.isiTipsTextView.setText(tips.getIsiTips());
 
         holder.pelajariButton.setOnClickListener(v -> {
-            // Implementasi tombol "Pelajari"
+            Intent intent = new Intent(context, DetailTipsActivity.class);
+            intent.putExtra("judulTips", tips.getJudulTips());
+            intent.putExtra("isiTips", tips.getIsiTips());
+            context.startActivity(intent);
         });
     }
 

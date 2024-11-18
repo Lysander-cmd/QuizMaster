@@ -15,6 +15,7 @@ import com.example.quizmaster.Fragment.HomePageFragment;
 import com.example.quizmaster.Fragment.HomePageSiswaFragment;
 import com.example.quizmaster.Fragment.ProfileFragment;
 import com.example.quizmaster.Fragment.QuizFragment;
+import com.example.quizmaster.Fragment.QuizSiswaFragment;
 import com.example.quizmaster.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -43,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
         // Tentukan fragmen beranda berdasarkan role
         if ("siswa".equals(role)) {
             adapter.addFragment(new HomePageSiswaFragment(), "Beranda");
+            adapter.addFragment(new QuizSiswaFragment(), "Quiz");
+            adapter.addFragment(new ProfileFragment(), "Profile");
         } else {
             adapter.addFragment(new HomePageFragment(), "Beranda");
+            adapter.addFragment(new QuizFragment(), "Quiz");
+            adapter.addFragment(new ProfileFragment(), "Profile");
         }
 
-        adapter.addFragment(new QuizFragment(), "Quiz");
-        adapter.addFragment(new ProfileFragment(), "Profile");
+
 
         binding.viewPager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(binding.viewPager);

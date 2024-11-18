@@ -17,8 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterSiswaActivity extends AppCompatActivity {
     private ActivityRegisterSiswaBinding binding;
     private SignUpController signUpController;
-    private FirebaseAuth auth;
-    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,32 +24,39 @@ public class RegisterSiswaActivity extends AppCompatActivity {
         binding = ActivityRegisterSiswaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        auth = FirebaseAuth.getInstance();  // Inisialisasi FirebaseAuth
+        // Inisialisasi SignUpController
         signUpController = new SignUpController(this);
 
-        String role = getIntent().getStringExtra("role");  // Ambil role dari Intent
+        // Ambil role dari Intent
+        String role = getIntent().getStringExtra("role");
 
-        // Dapatkan userId hanya jika pengguna saat ini tidak null
-        if (auth.getCurrentUser() != null) {
-            String userId = auth.getCurrentUser().getUid();
-            userRef = FirebaseDatabase.getInstance().getReference()
-                    .child("users").child(userId);
-
-            // Simpan role ke database
-            userRef.child("role").setValue(role);
-        } else {
-            Toast.makeText(this, "Pengguna tidak terautentikasi.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
+        // Tombol registrasi
         binding.btnRegister.setOnClickListener(v -> {
-            String username = binding.edtNama.getText().toString();
-            String noTelp = binding.edtNoTelp.getText().toString();
-            String email = binding.edtEmailRegister.getText().toString();
-            String password = binding.edtPasswordRegister.getText().toString();
-            String confirmPassword = binding.edtKonfirmasiPasswordRegister.getText().toString();
+            // Ambil input pengguna
+            String username = binding.edtNama.getText().toString().trim();
+            String noTelp = binding.edtNoTelp.getText().toString().trim();
+            String email = binding.edtEmailRegister.getText().toString().trim();
+            String password = binding.edtPasswordRegister.getText().toString().trim();
+            String confirmPassword = binding.edtKonfirmasiPasswordRegister.getText().toString().trim();
 
-            signUpController.fillFormRegistrasi(username, noTelp, email, password, confirmPassword, null, false, role); // Tambahkan role sebagai parameter
+            // Panggil metode dari SignUpController
+            signUpController.fillFormRegistrasi(
+                    username,
+                    noTelp,
+                    email,
+                    password,
+                    confirmPassword,
+                    null,  // Tidak ada file untuk siswa
+                    false, // isTeacher = false
+                    role
+            );
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Mencegah kembali ke layar registrasi, aplikasi akan keluar
+        super.onBackPressed();
+        finishAffinity(); // Menutup semua aktivitas yang ada di dalam task
     }
 }

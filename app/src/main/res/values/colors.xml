@@ -5,5 +5,7 @@
     <color name="blueprimary">#255C99</color>
     <color name="gray">#828282</color>
     <color name="material_grey_50">#FAFAFA</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
 
 </resources>
