@@ -27,7 +27,6 @@ public class SignUpController {
     }
 
     public void fillFormRegistrasi(String username, String noTelp, String email, String password, String confirmPassword, @Nullable Uri fileUri, boolean isTeacher, String role) {
-        // ... validasi lainnya
         // Validasi nomor telepon
         if (noTelp.isEmpty() || noTelp.length() < 10) {
             Toast.makeText(context, "Nomor Telepon Tidak Valid", Toast.LENGTH_SHORT).show();

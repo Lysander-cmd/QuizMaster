@@ -56,7 +56,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:outlineSpotShadowColor="@color/white"
         app:cardCornerRadius="10dp"
         app:strokeColor="#D4E5E7"
