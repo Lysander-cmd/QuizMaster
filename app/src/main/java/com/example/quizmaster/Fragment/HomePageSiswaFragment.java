@@ -36,7 +36,7 @@ public class HomePageSiswaFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_page_siswa, container, false);
 
         recyclerViewQuiz = view.findViewById(R.id.recyclerViewQuiz);
         recyclerViewQuiz.setLayoutManager(
