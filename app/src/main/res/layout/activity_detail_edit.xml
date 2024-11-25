@@ -201,14 +201,13 @@
                     android:hint="Waktu"
                     android:padding="8dp"
                     android:backgroundTint="@android:color/darker_gray" />
-                <EditText
-                    android:id="@+id/editTextDifficult"
+                <Spinner
+                    android:id="@+id/spinner_difficulty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Level"
-                    android:padding="8dp"
-                    android:backgroundTint="@android:color/darker_gray" />
-
+                    android:layout_marginTop="16dp"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/difficulty_levels" />
             </LinearLayout>
             <!-- Tombol Edit Kuis -->
             <Button

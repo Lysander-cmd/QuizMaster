@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +42,15 @@ import java.util.Map;
 
 public class DetailEditActivity extends AppCompatActivity {
 
-    private EditText editTextJudulKuis, editTextPertanyaan, editTextJawaban, editTextMapel, editTextTime, editTextDifficult;
+    private EditText editTextJudulKuis, editTextPertanyaan, editTextJawaban, editTextMapel, editTextTime;
+    private Spinner spinnerDifficulty;
     private TextView textTitle, textSubject, textDuration, textDifficulty;
-    private Button buttonUpdateKuis;
+    private Button buttonUpdateKuis, buttonTambahOpsi;
     private DatabaseReference databaseReference;
     private LinearLayout opsiContainer;  // Menambahkan wadah untuk opsi
     private String quizId;
     private ArrayList<EditText> opsiList = new ArrayList<>();  // Daftar opsi yang ada
+    private int opsiCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,8 @@ public class DetailEditActivity extends AppCompatActivity {
         editTextJawaban = findViewById(R.id.editTextJawaban);
         editTextMapel = findViewById(R.id.editTextMapel);
         editTextTime = findViewById(R.id.editTextTime);
-        editTextDifficult = findViewById(R.id.editTextDifficult);
+        buttonTambahOpsi = findViewById(R.id.buttonTambahOpsi);
+        spinnerDifficulty = findViewById(R.id.spinner_difficulty);
         buttonUpdateKuis = findViewById(R.id.buttonUpdateQuiz);
 
         // CardView elements
@@ -75,6 +81,13 @@ public class DetailEditActivity extends AppCompatActivity {
         if (quizId != null) {
             loadQuizData(quizId);
         }
+        buttonTambahOpsi.setOnClickListener(v -> {
+            if (opsiCount >= 4) {
+                Toast.makeText(this, "Maksimal 4 opsi dapat ditambahkan!", Toast.LENGTH_SHORT).show();
+            } else {
+                tambahOpsi("");  // Tambah opsi baru dengan teks kosong
+            }
+        });
 
         // Menambahkan listener untuk tombol update
         buttonUpdateKuis.setOnClickListener(v -> updateDataKuis());
@@ -82,6 +95,17 @@ public class DetailEditActivity extends AppCompatActivity {
         ImageView icArrowLeft = findViewById(R.id.ic_arrow_left);
         icArrowLeft.setOnClickListener(v -> {
             finish();
+        });
+        spinnerDifficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedDifficulty = parent.getItemAtPosition(position).toString();
+                Log.d("SpinnerSelection", "Selected Difficulty: " + selectedDifficulty);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 
@@ -99,13 +123,13 @@ public class DetailEditActivity extends AppCompatActivity {
                     editTextJawaban.setText(quiz.getAnswer());
                     editTextMapel.setText(quiz.getSubject());
                     editTextTime.setText(quiz.getDuration());
-                    editTextDifficult.setText(quiz.getDifficulty());
 
                     // Mengatur data ke dalam CardView
                     textTitle.setText(quiz.getTitle());
                     textSubject.setText(quiz.getSubject());
                     textDuration.setText("Waktu: " + quiz.getDuration());
                     textDifficulty.setText("Level: " + quiz.getDifficulty());
+
 
                     // Mengambil dan menampilkan opsi
                     List<String> opsi = quiz.getOpsi(); // Ambil opsi dari Firebase
@@ -114,6 +138,18 @@ public class DetailEditActivity extends AppCompatActivity {
                             tambahOpsi(opsiText);  // Menambahkan opsi yang sudah ada
                         }
                     }
+                    String difficulty = quiz.getDifficulty();
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                            DetailEditActivity.this,
+                            R.array.difficulty_levels,
+                            android.R.layout.simple_spinner_item
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerDifficulty.setAdapter(adapter);
+
+                    // Cari index nilai spinner yang sesuai dengan difficulty
+                    int spinnerPosition = adapter.getPosition(difficulty);
+                    spinnerDifficulty.setSelection(spinnerPosition);
                 }
             }
 
@@ -138,9 +174,11 @@ public class DetailEditActivity extends AppCompatActivity {
         ));
         opsiList.add(editTextOpsi);
 
+
         opsiLayout.addView(radioButton);
         opsiLayout.addView(editTextOpsi);
         opsiContainer.addView(opsiLayout);
+        opsiCount++;
     }
 
     // Fungsi untuk memperbarui data kuis di Firebase
@@ -150,10 +188,24 @@ public class DetailEditActivity extends AppCompatActivity {
         String jawaban = editTextJawaban.getText().toString().trim();
         String mataPelajaran = editTextMapel.getText().toString().trim();
         String waktu = editTextTime.getText().toString().trim();
-        String level = editTextDifficult.getText().toString().trim();
+        String difficulty = spinnerDifficulty.getSelectedItem().toString();
 
-        if (judulKuis.isEmpty() || pertanyaan.isEmpty() || jawaban.isEmpty() || mataPelajaran.isEmpty() || waktu.isEmpty() || level.isEmpty()) {
+        if (judulKuis.isEmpty() || pertanyaan.isEmpty() || jawaban.isEmpty() || mataPelajaran.isEmpty() || waktu.isEmpty() || difficulty.isEmpty()) {
             Toast.makeText(this, "Pastikan semua data sudah terisi!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (judulKuis.length() > 50) {
+            Toast.makeText(this, "Judul maksimal 50 karakter!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (pertanyaan.length() > 200) {
+            Toast.makeText(this, "Pertanyaan maksimal 200 karakter!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (jawaban.length() > 200) {
+            Toast.makeText(this, "Jawabam maksimal 200 karakter!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -171,7 +223,7 @@ public class DetailEditActivity extends AppCompatActivity {
         kuisData.put("jawaban", jawaban);
         kuisData.put("mataPelajaran", mataPelajaran);
         kuisData.put("waktu", waktu);
-        kuisData.put("level", level);
+        kuisData.put("difficulty", difficulty);
         kuisData.put("opsi", opsi);  // Menyimpan opsi yang sudah dimodifikasi
 
         databaseReference.updateChildren(kuisData).addOnCompleteListener(task -> {
