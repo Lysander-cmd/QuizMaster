@@ -54,6 +54,16 @@ public class TipsActivity extends AppCompatActivity {
             judulTipsEditText.requestFocus();
             return;
         }
+        if (judulTips.length() > 50) {
+            Toast.makeText(this, "Judul maksimal 50 karakter!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (isiTips.length() > 5000) {
+            Toast.makeText(this, "Isi tips maksimal 200 karakter!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         if (isiTips.isEmpty()) {
             tipsEditText.setError("Isi tips tidak boleh kosong");
